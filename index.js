@@ -1,3 +1,3 @@
-const Queue = require('./lib/Queue');
+const Queue = require('./lib/queue_manager');
 
 module.exports = Queue;
