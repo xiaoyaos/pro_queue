@@ -5,12 +5,11 @@ const testQueue1 = Queue.newQueue('test1');
 (async ()=>{
   
   // test设置任务处理及间隔
-  testQueue.process(1000, (job, done)=>{
-    console.log(`\r\nstart queue test process job:`, job.id, job.data);
-    return done();
-  });
+  // testQueue.process(1000, (job, done)=>{
+  //   console.log(`\r\nstart queue test process job:`, job.id, job.data);
+  //   return done();
+  // });
   testQueue.createdJob({a: 'test'});
-  
 
   testQueue1.createdJob({a: 'test1'});
   // test1设置任务处理及间隔

@@ -18,3 +18,20 @@ testQueue.process(1000, (job, done)=>{
 });
 testQueue.createdJob({a: 'test'});
 ```
+
+
+## 待实现功能计划
+
+### 任务失败重试，可设置重试次数
+### 并发数量
+### 任务执行结果时间
+succeeded：任务成功执行
+
+retrying：任务失败需要重新尝试，且剩余尝试次数
+
+failed：任务失败，且没有重试次数
+
+progress：
+
+### 队列数据持久化
+防止程序中断或异常终止时重启程序，队列数据丢失
