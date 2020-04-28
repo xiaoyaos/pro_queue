@@ -15,10 +15,25 @@ testQueue.createdJob({a: 'test'});
 testQueue.process(1000, (job, done)=>{
   console.log(`\r\nstart queue test process job:`, job.id, job.data);
   return done();
-});
+}, true);
 testQueue.createdJob({a: 'test'});
 ```
+关于异步和同步执行队列使用详情请参考根目录下test目录下源码
 
+# API
+## createdJob(any)
+
+name | type |  Description  
+-|-|-
+obj | object | 需要添加的任务数据可以使任意类型数据 |
+
+## process(timeout, callback, sync)
+
+name | type |  Description  
+-|-|-
+timeout | number | 间隔时间，如果是同步执行，目前忽略间隔参数 |
+callback | Function | 具体任务数据处理逻辑 |
+sync | boolean | 是否同步执行，默认异步，按照时间间隔执行 |
 
 ## 待实现功能计划
 

@@ -3,18 +3,18 @@ const testQueue = Queue.newQueue('test');
 
 (async ()=>{
   
-  // test设置任务处理及间隔
   testQueue.createdJob({a: 'test'});
 
-  testQueue.process(3000, async (job, done)=>{
+  testQueue.process(500, async (job, done)=>{
     console.log(`\r\nstart queue test process job:`, job.id, job.data);
     await (new Promise(res=>{
       setTimeout(()=>{
         res();
-      }, 3000);
+      }, 5000);
     }))
+    console.log(`\r\nend queue test process job:`, job.id, job.data);
     return done();
-  }, true);
+  }, false);
 
   // 添加任务到队列
   let count = 0;
