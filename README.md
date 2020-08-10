@@ -5,18 +5,37 @@
 
 ## 使用
 ```js
-// 创建新的队列
 const Queue = require('../index');
 const testQueue = Queue.newQueue('test');
 
-testQueue.createdJob({a: 'test'});
+(async ()=>{
+  
+  // test设置任务处理及间隔
+  testQueue.process(3000, async (job, done)=>{
+    console.log(`\r\nstart queue test process job:`, job.id, job.data);
+    await (new Promise(res=>{
+      setTimeout(()=>{
+        res();
+      }, 3000);
+    }))
+    return done();
+  }, true);
 
-// test队列设置任务处理及间隔
-testQueue.process(1000, (job, done)=>{
-  console.log(`\r\nstart queue test process job:`, job.id, job.data);
-  return done();
-}, true);
-testQueue.createdJob({a: 'test'});
+
+  // 添加任务到队列
+  console.log('========> add job to queue test');
+  job = await testQueue.createdJob({a: 1});
+  
+  job.on("successed",(j, )=>{
+    console.log("job", j.id, "success")
+  })
+
+  job.on("error",(j, )=>{
+    console.log("job", j.id, "error")
+  })
+
+})();
+
 ```
 关于异步和同步执行队列使用详情请参考根目录下test目录下源码
 
@@ -34,6 +53,14 @@ name | type |  Description
 timeout | number | 间隔时间，如果是同步执行，目前忽略间隔参数 |
 callback | Function | 具体任务数据处理逻辑 |
 sync | boolean | 是否同步执行，默认异步，按照时间间隔执行 |
+
+# Events
+name  |  Description  
+-|-
+successed | 成功
+failed | 失败
+暂时只支持同步执行时有事件
+
 
 ## 待实现功能计划
 
